@@ -20,13 +20,14 @@ def assign_scores(sorted_data):  # Calculates the score of every name and return
     return list_of_name_scores
 
 
-def name_scores(filename):  # returns the list of scores using sort_names and assign_scores
+def name_scores(filename):  # Returns the list of scores using sort_names and assign_scores
     list_of_scores = assign_scores(sort_names(filename))
     return list_of_scores
 
 
-def total_name_scores(filename):  # returns the
+def total_name_scores(filename):  # Returns the total names_scores
     return sum(name_scores(filename))
 
 
 print(total_name_scores("names.txt"))
+# print(name_scores("names.txt"))
