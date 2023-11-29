@@ -1,10 +1,23 @@
 from itertools import islice, permutations
 
 
-def lexicographically_permutate(range_limit, target):
-    digit_permutations = permutations(range(range_limit))
-    digits = next(islice(digit_permutations, target - 1, target))
-    answer = sum([digit * 10 ** (range_limit - 1 - i) for i, digit in enumerate(digits)])
-    return answer
+def lexicographically_permutate(tuple_of_digits, target):
+    # set a variable for the itertools permutation of the tuple
+    digit_permutations = permutations(tuple_of_digits)
 
-print(lexicographically_permutate(10, 1000000))
+    # slice the digit_permutation obj to the permutation of the tuple you are targeting
+    digits = next(
+        islice(
+            digit_permutations, target - 1, target
+        )
+    )
+
+    # join the tuple digits into a str
+    ans = ''.join(map(str, digits))
+
+    return ans
+
+
+print(lexicographically_permutate((0, 1, 2, 3, 4, 5, 6, 7, 8, 9), 1000000))
+
+
