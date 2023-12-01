@@ -31,7 +31,7 @@ def lexicographically_permutate(tuple_of_digits, target) -> str:
     else:
 
         # return an error message
-        return f"There are not {target} permutations of those numbers"
+        return f"There are not {target} permutations of the numbers"
 
 
 print(lexicographically_permutate((0, 1, 2, 3, 4, 5, 6, 7, 8, 9), 1000000))
