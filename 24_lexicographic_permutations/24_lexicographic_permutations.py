@@ -3,34 +3,34 @@ import math
 
 
 def lexicographically_permutate(tuple_of_digits, target) -> str:
+    """Targeted Permutation of list of numbers
 
-    # calculate the total number of permutations that are possible
+        Args:
+            tuple_of_digits: tuple of numbers provided by the user to be permuted
+            target: a number which indicates which permutation is of interest
+
+        Returns:
+            The targeted permutation
+            Ex:
+            lexicographically_permutate((1, 2, 3), 1)
+            -> 123
+
+        Raises:
+            Error: if the target falls out of the range of possible permutations
+    """
     possible_permutations = math.factorial(len(tuple_of_digits))
 
-    # if the target is less than the total permutations:
     if target <= possible_permutations:
-
-        # set a variable for the itertools permutation of the tuple
         digit_permutations = permutations(tuple_of_digits)
-
-        # slice the digit_permutation obj to the permutation of the tuple you are targeting
         digits = next(
             islice(
                 digit_permutations, target - 1, target
-
             )
         )
+        targeted_permutation = ''.join(map(str, digits))
+        return targeted_permutation
 
-        # join the tuple digits into a str
-        ans = ''.join(map(str, digits))
-
-        # return the permutation of interest
-        return ans
-
-    # if there are fewer permutations than the target:
     else:
-
-        # return an error message
         return f"There are not {target} permutations of the numbers"
 
 
