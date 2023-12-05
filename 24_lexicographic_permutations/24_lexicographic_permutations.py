@@ -2,7 +2,7 @@ from itertools import islice, permutations
 import math
 
 
-def lexicographically_permutate(tuple_of_digits, target) -> str:
+def lexicographically_permutate(tuple_of_digits: tuple, target: int) -> str:
     """Targeted Permutation of list of numbers
 
         Args:
