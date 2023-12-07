@@ -1,33 +1,40 @@
-def sort_names(filename):  # Opens the file, reads, sorts and returns the sorted data
-    my_file = open(f"{filename}", "r")
-    data = my_file.read()
-    sorted_data = [name.strip().strip('"') for name in data.split(",")]
-    my_file.close()
-    sorted_data.sort()
-    return sorted_data
+import json
+import logging
+
+CAPITAL_NUMBER_KEY = 64
 
 
-def assign_scores(sorted_data):  # Calculates the score of every name and returns a list of scores
+def load_names(filename: str):
+    try:
+        with open(filename, "r") as file:
+            loaded_data = json.load(file)
+            names = loaded_data.get("names")
+            return assign_scores(names)
+    except Exception as e:
+        logging.error("There was an error loading the names")
+    return None
+
+
+def assign_scores(names):
     list_of_name_scores = []
-    name_counter = 0
-    for name in sorted_data:
-        name_counter += 1
+    i = 0
+    names.sort()
+    for name in names:
+        i += 1
         score_counter = 0
         characters = ([*name])
         for character in characters:
-            score_counter += ord(character) - 64
-        list_of_name_scores.append(score_counter * name_counter)
+            score_counter += ord(character) - CAPITAL_NUMBER_KEY
+        list_of_name_scores.append(score_counter * i)
     return list_of_name_scores
 
 
-def name_scores(filename):  # Returns the list of scores using sort_names and assign_scores
-    list_of_scores = assign_scores(sort_names(filename))
-    return list_of_scores
+def score_names(filename):
+    return sum(
+        load_names(
+            filename
+        )
+    )
 
 
-def total_name_scores(filename):  # Returns the total names_scores
-    return sum(name_scores(filename))
-
-
-print(total_name_scores("names.txt"))
-# print(name_scores("names.txt"))
+print(score_names("names.txt"))
